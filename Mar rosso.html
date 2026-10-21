@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang ="it">
+    <head>
+        <title>Pizzeria Mare Rosso</title>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <link rel ="stylesheet" href = "stylesheet.css">
+    </head>
+    <body>
+        <header class="titlecontainer">
+            <h1 class="htitle">MARE ROSSO</h1>
+            <a href="https://www.google.com/maps/place/Mare+Rosso/@45.3480974,9.968582,17z/data=!3m1!4b1!4m6!3m5!1s0x47811036ec1ec607:0x5ba30f215de24a22!8m2!3d45.3480974!4d9.968582!16s%2Fg%2F1jmcggs28?entry=ttu&g_ep=EgoyMDI2MTAxNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="top-address">📍 Via Solferino 24, Borgo San Giacomo (BS)</a>
+        
+            <div class="hbuttons">
+               <a href="tel:+393889090124" class="btn btn-call">Chiama Ora</a>
+               <a href="https://www.justeat.it/restaurants-mar-rosso---borgo-san-giacomo-25022-25022/menu" target="_blank" class="btn btn-order">Ordina su Just Eat</a>
+               <a href="#menu-catalog" class="btn btn-menu">Sfoglia Menù</a>
+            </div>
+        </header>
+        <section id="menu-catalog" class="catalog-container">
+            <h2>Il Nostro Menù</h2>
+
+            <div class="category-tabs">
+                <button onclick="filterCategory('pizze')" class="tab-btn active">Pizze</button>
+                <button onclick="filterCategory('fritti')" class="tab-btn">Fritti</button>
+                <button onclick="filterCategory('kebab')" class="tab-btn">Kebab</button>
+                <button onclick="filterCategory('dolci')" class="tab-btn">Dolci</button>
+            </div>
+
+
+            <div class="catalog-content">
+                <div class="items-list" id="items-list">
+
+                </div>
+            
+
+                <div id="image-preview-box">
+                    <img id="preview-img" src="" alt="Anteprima Prodotto">
+                </div>
+            </div>
+        </section>
+        <script>
+                const menuData = {
+                    pizze: [
+                        { name: "MARGHERITA", price: "€ 5,00", img: "https://rs-menus-api.roocdn.com/images/7ce4f5f1-667c-4b3b-8d66-ced4311a565b/image.jpeg" },
+                        { name: "MARINARA", price: "€ 4,50", img: "https://media-assets.lacucinaitaliana.it/photos/63c01847f5d7419a2dc115ef/1:1/w_1334,h_1334,c_limit/Pizza%20Marinara.jpg" },
+                        { name: "SALAMINO PICCANTE", price: "€ 6,00", img: "https://misterpizza.eu/it/wp-content/uploads/2014/04/diavola.jpg" },
+                        { name: "QUATTRO STAGIONI", price: "€ 7,50", img: "https://i0.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2016/07/3017_Pizza.jpg?resize=895%2C616&ssl=1" },
+                        { name: "QUATTRO FORMAGGI", price: "€ 7,50", img: "https://www.insidetherustickitchen.com/wp-content/uploads/2020/07/Quattro-formaggi-pizza-square-Inside-the-rustic-kitchen.jpg" },
+                        { name: "PIZZA PATATINE", price: "€ 6,00", img: "https://www.frescoegenuino.com/store/wp-content/uploads/2021/01/5CD3211E-B83D-412F-BC6C-F64FE0438726-scaled.jpeg" },
+                        { name: "PROSCIUTTO", price: "€ 6,00", img: "https://pizzeriahappydays.it/wp-content/uploads/2020/05/pizza-al-prosciutto2.png" },
+                        { name: "PROSCIUTTO E FUNGHI", price: "€ 7,00", img: "https://fiordigrano.minutocaffe.it/wp-content/uploads/2021/01/05333.jpg" },
+                        { name: "ACCIUGHE DEL CANTABRICO", price: "€ 9,00", img: "https://www.angeloparodi.it/image/cache/catalog/blog/Acciughe/Pizza%20Napoletana/012--cover-1280x720.jpg" },
+                        { name: "ALI BABÀ", price: "€ 7,50", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500" },
+                        { name: "BRACCIO DI FERRO", price: "€ 7,00", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkVADPP439vZTS5mitTklrMsUs0YblI9MyDprXLH1iL6TgGv91uTKd4POo&s=10" },
+                        { name: "BRESAOLA", price: "€ 7,00", img: "https://salumitalia.it/wp-content/uploads/2021/01/07_BRASAOLA_FIN.jpg" },
+                        { name: "BUFALA", price: "€ 6,50", img: "https://www.cuocicuoci.com/wp-content/uploads/2022/03/pizza-bufalotta.jpg" },
+                        { name: "CAIRO", price: "€ 8,50", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3dhBspFRn_RPMam-IPJOmfvN_tBd92Q5oM0klkBezv1XsRV5KbuqTpdoy&s=10" },
+                        { name: "CALAMARI", price: "€ 8,00", img: "https://media-cdn.tripadvisor.com/media/photo-s/13/bc/f2/56/pizza-ai-calamari-fritti.jpg" },
+                        { name: "CALAMARI E GAMBERETTI", price: "€ 9,00", img: "https://media-cdn.tripadvisor.com/media/photo-s/0f/28/4f/9e/pizza-con-frittura-di.jpg" },
+                        { name: "CALZONE AFFUMICATO", price: "€ 7,50", img: "https://media-assets.lacucinaitaliana.it/photos/645b90d8f783ffb60d878be3/16:9/w_2111,h_1187,c_limit/Calzone%20al%20forno.jpg" },
+                        { name: "CALZONE FARCITO", price: "€ 7,50", img: "https://recipesblob.paneangeli.it/assets/80d5605863064425b82894dc4162cdc4/1272x764/calzone-ripieno-ricjpg.jpg" },
+                        { name: "CAMPAGNOLA", price: "€ 7,50", img: "https://www.cuocicuoci.com/wp-content/uploads/2022/03/pizza-con-pomodorini-gialli-e-pancetta-affumicata.jpg" },
+                        { name: "CAPRESE", price: "€ 8,50", img: "https://blog.giallozafferano.it/odoredifelicita/wp-content/uploads/2019/10/pizza-ai-funghi-porcini-1mod.jpg" },
+                        { name: "CAPRICCIOSA", price: "€ 7,50", img: "https://foodbydrygast.com/assets/images/recipes/swedish_pizza_capricciosa1x1a1080w1080h.webp" },
+                        { name: "CASARECCIA", price: "€ 7,00", img: "https://www.pizzartfano.com/utenti/pizzartfano_com/uploads/img_9553.jpg" },
+                        { name: "CRUDO", price: "€ 7,00", img: "https://wips.plug.it/cips/buonissimo.org/cms/2011/12/pizza-al-prosciutto-crudo.jpg" },
+                        { name: "DOLOMITI", price: "€ 8,00", img: "https://www.silviocicchi.com/pizzachef/wp-content/uploads/2015/10/pizza-speck-e-gorgonzola-3.jpg" },
+                        { name: "EL PASO", price: "€ 8,50", img: "https://stefanocavada.it/wp-content/uploads/2024/09/Pizza-BBQ-con-pancetta-coppata-1-600x900.jpg" },
+                        { name: "FANTASIA", price: "€ 8,50", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbLOj5JOyAk8Phki8mKsrcPWa4UBjsEycFgXzFH-2NdmT6M3ZeGwWzv3VS&s=10" },
+                        { name: "FRUTTI DI MARE", price: "€ 8,00", img: "https://dapino.it/wp-content/uploads/2020/09/Pizza-frutti-di-mare--scaled.jpg" },
+                        { name: "FUMOSA", price: "€ 8,50", img: "https://zerbinati.com/wp-content/uploads/2022/08/rucola-2.jpg" },
+                        { name: "FUNGHI PORCINI", price: "€ 6,50", img: "https://www.quattroemme.com/wp-content/uploads/2023/06/Base-pizza-quattroemme-pizza-con-funghi-926x1024.jpg" },
+                        { name: "GAMBERETTI E RUCOLA", price: "€ 7,50", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb2cN5KA2YvRkmG24bZwbYTCwmGebsyCfz8K_QMJQG0gYS9gjp-10MrGs&s=10" },
+                        { name: "GUSTOSA", price: "€ 8,00", img: "https://blog.giallozafferano.it/giustopergusto/wp-content/uploads/2016/10/IMG_3636.jpg" },
+                        { name: "MARE ROSSO", price: "€ 8,50", img: "https://media-cdn.tripadvisor.com/media/photo-s/04/39/26/ec/ristorante-borgo-s-agostino.jpg" },
+                        { name: "MIMMA", price: "€ 8,50", img: "https://www.fontanaeanghinetti.it/wp-content/uploads/2018/05/pizza-prosciutto-crudo.jpg" },
+                        { name: "MARI E MONTI", price: "€ 8,50", img: "https://dapino.it/wp-content/uploads/2020/09/Pizza-frutti-di-mare--scaled.jpg" },
+                        { name: "MONTAGNOLA", price: "€ 8,50", img: "https://blog.giallozafferano.it/coloriesaporiincucina/wp-content/uploads/2021/01/pizza-con-speck-e-rucola.jpg" },
+                        { name: "NAPOLETANA", price: "€ 6,00", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4plKRZZ0rmJj_Z_OrqvfmP-WxGxScae7uuOv83wzPdyZ_80wHYHrmesU&s=10" },
+                        { name: "OCCHI DI BUE", price: "€ 8,50", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1puKJoWLWkiJz4x-azjo2drz0bQOhuBWwFRynvLmE73M2euf185Uldbs&s=10" },
+                        { name: "PARMIGIANA", price: "€ 8,00", img: "https://blog.giallozafferano.it/gustoamoreefantasie/wp-content/uploads/2025/05/bloggggggggggggggggggggggggggggggg-960x720.jpg" },
+                        { name: "PESCATORA", price: "€ 8,50", img: "https://www.pizzeriamaesta.it/wp/wp-content/uploads/2019/08/Pizza-Pescatora-Pizzeria-Maest%C3%A0-Verona-1024x592.jpg" },
+                        { name: "PUGLIESE", price: "€ 6,00", img: "https://media-assets.lacucinaitaliana.it/photos/61fbd8df3697f3ffd0cffbc5/3:2/w_1200,h_800,c_limit/pizza-tonno-cipolle-800.jpg" },
+                        { name: "ROMANA", price: "€ 7,50", img: "https://www.cuocicuoci.com/wp-content/uploads/2021/06/posillipo.jpg" },
+                        { name: "RUSTICA", price: "€ 8,00", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq8FsyaMk3Eo46tOdq2S_QYRq1RNO7awLwk_A9sQZ8mXp9-nsnpDCafsE&s=10" },
+                        { name: "SPARTACO", price: "€ 8,50", img: "https://facebook.ordinalo.net/pizzartfano_com/utenti/pizzartfano_com/uploads/img_9645-modifica.jpg" },
+                        { name: "SPECK E BRIE", price: "€ 7,50", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-f98DE6Bpz9dI1mzSX2vaGdi5S_IYPGrWUaIJL1TlHt1VPiloww6-ES0&s=10" },
+                        { name: "ZINGARA", price: "€ 7,50", img: "https://www.pizzeriagraniantichi.it/templates/yootheme/cache/26/pizza-zingara-263e5068.png" }
+                    ],
+                    fritti: [
+                        {name: "Patatine Fritte", price: " 3,50 €", img: "https://www.pizzeriainzerillo.it/utenti/pizzeriainzerillo_it/cache/_pics/7/8/patatine-fritte1_9b1280c151e9ad4cc02507bab7a7e519_t.jpg"},
+                        {name: "Fritto di Calamari", price: " Por.Pic 6,00 € Por.Gra. 10,00€ ", img: "https://www.giallozafferano.it/images/ricette/153/15363/foto_hd/hd650x433_wm.jpg"},
+                        {name: "Fritto Misto", price: " Por.Pic 6,50 € Por.Gr. 11,50 €", img: "https://blog.giallozafferano.it/lemieloverie/wp-content/uploads/2019/01/1000066312-720x480.png"},
+                        {name: "Chele Di Granchio", price: " 6,00 €", img: "https://www.lodifish.com/upload/ricetta-chele-granchio-fritte-549.png"},
+                        {name: "Olive Ascolane", price: " 3,50 €", img: "https://media-assets.lacucinaitaliana.it/photos/61fd304a28bbd1b96fb68425/1:1/w_2560%2Cc_limit/olive-all-ascolana.jpg"},
+                        {name: "Mozzarelline", price: " 3,50 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU3R9CJU7IziRG4p9b8qwGB9CPjRT3JvO99MtuiHkI1UVHAimxvFASphw&s=10"},
+                        {name: "Crochette di Patate", price: " 3,50 €", img: "https://www.unileverfoodsolutions.it/dam/global-ufs/mcos/grit/italy/calcmenu/recipes/IT-recipes/sandwiches/croccette/Crocchette-1260X700.jpg"},
+                        {name: "Bastoncini di Pollo", price: " 4,50 €", img: "https://patrioli.it/wp-content/uploads/2024/10/005527_M.jpg"},
+                        {name: "Verdure Patellate", price: " 5,00 €", img: "https://www.giallozafferano.it/images/232-23284/Verdure-in-pastella_780x520_wm.jpg"},
+                        {name: "Fritto di Gamberi", price: " 7,00 €", img: "https://cdn.cook.stbm.it/thumbnails/ricette/116/116001/hd750x421.jpg"},
+                        {name: "Falafel", price: " 3,50 €", img: "https://www.cure-naturali.it/.imaging/default/dam/cure-naturali/articoli/alimentazione/falafel-apertura.jpg/jcr:content.jpg"},
+                        {name: "Alette di Pollo", price: " 3,50 €", img: "https://primochef.it/wp-content/uploads/2021/11/SH_ali_di_pollo_al_forno.jpg"}
+                    ],
+                    kebab: [
+                        {name: "Menu Panino Kebab", price: "7,00 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb4FOn2n7v66ArKBG9W2oOeGP0z5oN-2srWlrttejgTA&s=10"},
+                        {name: "Menu Piadina Kebab", price: "7,50 €", img: "https://glovo.dhmedia.io/image/menus-glovo/products/42e2e678b9a0f84fa076f87e3bdfb5441e817c3535c2ae7e4e1a648ccabead60?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19XQ=="},
+                        {name: "Panino Kebab", price: "4,50 €", img: "https://gustour.it/files/ricetta-kebab-pane-pita-arabo-salsa-yogurt.jpg"},
+                        {name: "Piadina Kebab", price: "5,00 €", img: "https://www.ristorantepizzeriajanna.com/wp-content/uploads/2015/12/panino-kebab.jpg"},
+                        {name: "Panino Kebab Grande", price: "6,50 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJSl7oS_JMwZK2b3iI-b7BIV2OpXLWknxtpJSqzrAKL4xDZj4VWbqJjpg&s=10"},
+                        {name: "Vaschetta Kebab", price: "6,00 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2TKahjh5UcI3TleLGTQDLTlZA8xqZBKbXaz27XKE-mY_lqr2YF6iSE9v&s=10"},
+                        {name: "Piatto Kebab", price: "7,00 €", img: "https://img.stmenu.it/thumbs/selforder/immagine/large/149895.jpg.jpg"},
+                        {name: "Pizza Kebab Solo Carne", price: "6,50 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz0_e1VPY57UFcNijKdIxVMsk-tDFfENDFnvPkwICpszR-gCNkNa53jic&s=10"},
+                        {name: "Calzone Kebab", price: "7,50 €", img: "https://img.magnific.com/foto-premium/calzone-di-kebab-con-salse-varie-fast-food_109656-1911.jpg"},
+                        {name: "Panino Falafel", price: "4,00 €", img: "https://snapcalorie-webflow-website.s3.us-east-2.amazonaws.com/media/food_pics_v2/medium/flafel_sandwich.jpg"},
+                        {name: "Piadina Falafel", price: "4,50 €", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhS3CYKOwlZ6sC3XOrXHaRmjiKEmm86fYRJTpIcKoHwU7KzjPQHWFWLEIQ&s=10"}
+                    ],
+                    dolci: [
+                        {name: "Panino Caldo Ripieno di Nutella", price: "3,00 €", img: "https://www.monzatoday.it/~media/horizontal-hi/3496382722811/nutella-5-2.jpg"}
+                    ]
+                };
+
+            function filterCategory(category, clickedButton) {
+                // Rimuove la classe 'active' da tutti i bottoni
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // Se viene passato il bottone cliccato, lo attiva; altrimenti attiva il primo (Pizze)
+                if (clickedButton) {
+                    clickedButton.classList.add('active');
+                } else {
+                    document.querySelector('.tab-btn').classList.add('active');
+                }
+
+                const listContainer = document.getElementById('items-list');
+                listContainer.innerHTML = '';
+
+                // Mostra i prodotti della categoria
+                menuData[category].forEach((item, index) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'menu-item-box';
+                    itemDiv.innerHTML = `<span><strong>${item.name}</strong></span> <span>${item.price}</span>`;
+
+                    // Al passaggio del mouse cambia l'immagine
+                    itemDiv.onmouseenter = () => {
+                        document.getElementById('preview-img').src = item.img;
+                    };
+
+                    listContainer.appendChild(itemDiv);
+                });
+
+                // Imposta l'immagine del primo elemento come anteprima iniziale
+                if (menuData[category].length > 0) {
+                    document.getElementById('preview-img').src = menuData[category][0].img;
+                }
+            }
+
+            // Avvia la pagina mostrando le pizze
+            filterCategory('pizze');
+        </script>
+    </body>
+</html>
