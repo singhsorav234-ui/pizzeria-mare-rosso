@@ -1,205 +1,227 @@
+/* Importazione del font moderno 'Poppins' */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-}
-
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #fdfdfd;
     color: #333;
 }
 
-.h-address{
-    color: #ffffff;
-    font-size: 1.1rem;
-    margin: 5px 0 15px 0;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-.titlecontainer{
-    height: 80vh;
-    width: 100vw;
-    background-image: url('https://www.tancabarpizzeria.it/wp-content/uploads/pizza-margherita.jpg');
+/* Header con lo sfondo corretto che copre tutta la pagina */
+.titlecontainer {
+    min-height: 80vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+                url('https://www.tancabarpizzeria.it/wp-content/uploads/pizza-margherita.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
-    margin: 0;
+    padding: 40px 20px;
     box-sizing: border-box;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
 }
 
-.top-address{
+.top-address {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     color: #ffffff;
-    padding: 8px 14px;
+    padding: 8px 16px;
     border-radius: 20px;
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.top-address:hover{
-    background-color: rgba(231, 76, 60, 0.9);
+.top-address:hover {
+    background-color: #e74c3c;
     transform: translateY(-2px);
 }
 
-.htitle{
-    font-size: 64px;
+.htitle {
+    font-size: 60px;
+    font-weight: 800;
     color: #ffffff;
-    margin-bottom: 30px;
-    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
-    letter-spacing: 2px;
+    margin: 0 0 25px 0;
+    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
-.hbuttons{
+.hbuttons {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.btn{
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: bold;
+.btn {
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
     text-decoration: none;
     border-radius: 30px;
     color: #ffffff;
     transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    display: inline-block;
 }
 
-.btn-call{
+.btn-call {
     background-color: #27ae60;
 }
-.btn-order{
+.btn-order {
     background-color: #e67e22;
 }
-.btn-menu{
-    background-color: #c0392b;
+.btn-menu {
+    background-color: #e74c3c;
 }
 
-.hbuttons .btn:hover{
-    transform: scale(1.05);
+.hbuttons .btn:hover {
+    transform: translateY(-3px) scale(1.03);
 }
 
-.catalog-container{
+.catalog-container {
     max-width: 900px;
     margin: 40px auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 
-.category-tabs{
+.catalog-container h2 {
+    font-weight: 700;
+    text-align: center;
+    color: #111;
+}
+
+.category-tabs {
     display: flex;
     gap: 10px;
-    margin: 20px 0 30px 0;
+    margin: 25px 0 35px 0;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.tab-btn{
-    padding: 10px 20px;
+.tab-btn {
+    padding: 10px 22px;
     border: 2px solid #e74c3c;
-    background-color: #ecf0f1;
+    background-color: #ffffff;
     color: #e74c3c;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 16px;
+    font-size: 15px;
 }
 
-.tab-btn.active, .tab-btn:hover{
+.tab-btn.active, .tab-btn:hover {
     background-color: #e74c3c;
     color: #ffffff;
 }
 
-.catalog-content{
+.catalog-content {
     position: relative;
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 30px;
 }
 
-.items-list{
+.items-list {
     width: 55%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.menu-item-box{
-    background-color: #fdfdfd;
-    padding: 15px;
-    border-radius: 8px;
+.menu-item-box {
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
     transition: all 0.2s ease-in-out;
     border-left: 5px solid #e74c3c;
+    font-weight: 600;
 }
 
-.menu-item-box:hover{
-    transform: translateX(5px);
-    background-color: #fff3f3;
+.menu-item-box:hover {
+    transform: translateX(6px);
+    background-color: #fff8f8;
 }
 
-#image-preview-box{
+#image-preview-box {
+    position: sticky;
     top: 20px;
     width: 300px;
-    height: 400px;
-    border: 3px solid #c0392b;
-    border-radius: 12px;
+    height: 380px;
+    border: 3px solid #e74c3c;
+    border-radius: 15px;
     background-color: #fff;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    margin: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#preview-img{
+#preview-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-/* Media query per smartphone */
+/* Regole speciali per lo schermo dello smartphone */
 @media (max-width: 768px) {
+    .titlecontainer {
+        min-height: 70vh;
+        padding-top: 70px;
+    }
+
+    .top-address {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
     .catalog-content {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
     }
+
     .items-list {
         width: 100%;
     }
+
     .htitle {
-        font-size: 38px;
+        font-size: 36px;
+        letter-spacing: 1px;
     }
+
     #image-preview-box {
+        position: relative;
+        top: 0;
         width: 100%;
-        max-width: 300px;
-        height: 250px;
+        max-width: 320px;
+        height: 220px;
+        margin-bottom: 20px;
     }
 }
