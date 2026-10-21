@@ -1,3 +1,11 @@
+@media (max-width: 768px) {
+  /* Qui inserisci le regole per il telefono */
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fdfdfd;
